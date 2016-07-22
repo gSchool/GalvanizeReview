@@ -31,5 +31,13 @@ router.post('/', function(req,res,next) {
     });
 });
 
+router.post('/:id/upvote', function(req,res,next) {
+  knex('topics')
+  .where('id','=',req.params.id)
+  .increment('score',1)
+  .then(function () {
+    res.send("Upvoted")
+  })
+});
 
 module.exports = router;

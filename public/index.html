@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="galvanizeReview">
+<head>
+  <meta charset="UTF-8">
+  <title>Galvanize Review</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="js/app.js" charset="utf-8"></script>
+  <script src="https://use.fontawesome.com/014d5ac995.js"></script>
+</head>
+<body>
+
+  <h1>Galvanize Review</h1>
+
+  <div ng-controller="topics">
+    <form ng-submit="postTopic()">
+      <label for="title">Topic Name: </label>
+      <input type="text" id="title" ng-model="view.newPost.topic.title" required>
+      <label for="name">Your Name: </label>
+      <input type="text" id="name" ng-model="view.newPost.topic.name" required>
+      <br>
+      <label for="description">Description: </label>
+      <br>
+      <textarea id="description" rows="8" cols="70" ng-model="view.newPost.topic.description" required></textarea>
+      <br>
+      <input type="submit" value="Click me!">
+    </form>
+    <table>
+      <tr>
+        <th></th>
+        <th>Score</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Submitter</th>
+      </tr>
+      <tr ng-repeat="topic in view.topics | orderBy: '-score'">
+        <td><i class="fa fa-arrow-up" aria-hidden="true" ng-click="upvote(topic.id)"></i></td>
+        <td>{{topic.score}}</td>
+        <td>{{ topic.title}}</td>
+        <td>{{topic.description}}</td>
+        <td>{{topic.name}}</td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>
