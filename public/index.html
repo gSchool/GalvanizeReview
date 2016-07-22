@@ -24,7 +24,10 @@
       <br>
       <input type="submit" value="Click me!">
     </form>
-    <div ng-if="view.topics.length > 0">
+    <div ng-if="!view.topics.length">
+      No Topics Submitted
+    </div>
+    <div ng-if="view.topics.length">
       <table>
         <tr>
           <th></th>
