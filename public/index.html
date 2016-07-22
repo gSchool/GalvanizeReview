@@ -24,22 +24,25 @@
       <br>
       <input type="submit" value="Click me!">
     </form>
-    <table>
-      <tr>
-        <th></th>
-        <th>Score</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Submitter</th>
-      </tr>
-      <tr ng-repeat="topic in view.topics | orderBy: '-score'">
-        <td><i class="fa fa-arrow-up" aria-hidden="true" ng-click="upvote(topic.id)"></i></td>
-        <td>{{topic.score}}</td>
-        <td>{{ topic.title}}</td>
-        <td>{{topic.description}}</td>
-        <td>{{topic.name}}</td>
-      </tr>
-    </table>
+    <div ng-if="view.topics.length > 0">
+      <table>
+        <tr>
+          <th></th>
+          <th>Score</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Submitter</th>
+        </tr>
+        <tr ng-repeat="topic in view.topics | orderBy: '-score'">
+          <td><i class="fa fa-arrow-up" aria-hidden="true" ng-click="upvote(topic.id)"></i></td>
+          <td>{{topic.score}}</td>
+          <td>{{ topic.title}}</td>
+          <td>{{topic.description}}</td>
+          <td>{{topic.name}}</td>
+        </tr>
+      </table>
+    </div>
+
   </div>
 
 </body>
