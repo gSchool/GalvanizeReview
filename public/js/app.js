@@ -1,4 +1,4 @@
-var app = angular.module("galvanizeReview", []);
+var app = angular.module("galvanizeReview", ['ngMaterial']);
 
 app.controller("topics", function($scope,$http){
   $scope.view = {};
