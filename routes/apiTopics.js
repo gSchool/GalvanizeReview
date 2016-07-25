@@ -9,17 +9,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req,res,next) {
-  if (!req.body.topic ||
-    !req.body.topic.title ||
-    !req.body.topic.name ||
-    !req.body.topic.description) {
+  if (!req.body ||
+    !req.body.title ||
+    !req.body.name ||
+    !req.body.description) {
     res.status(400).json({ error: 'Bad Request' });
   }
   knex('topics')
     .insert({
-      title: req.body.topic.title,
-      name: req.body.topic.name,
-      description: req.body.topic.description,
+      title: req.body.title,
+      name: req.body.name,
+      description: req.body.description,
       score: 1,
       isActive: true
     })

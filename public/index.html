@@ -1,50 +1,60 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="galvanizeReview">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
   <title>Galvanize Review</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-  <script src="js/app.js" charset="utf-8"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <!-- Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js" defer></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js" defer></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js" defer></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js" defer></script>
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js" defer></script>
+  <!-- Font Awesome Library -->
   <script src="https://use.fontawesome.com/014d5ac995.js"></script>
+  <!-- Application bootstrap  -->
+  <script src="js/app.js" charset="utf-8" defer></script>
 </head>
-<body>
+<body ng-app="galvanizeReview" ng-cloak>
 
-  <h1>Galvanize Review</h1>
+  <!-- Container #1 (see wireframe) -->
+  <md-toolbar class="demo-toolbar md-primary _md" layout="row" >
+    <h3 style="padding-left: 10px;"class="ng-binding">g[23] Review</h3>
+  </md-toolbar>
 
-  <div ng-controller="topics">
-    <form ng-submit="postTopic()">
-      <label for="title">Topic Name: </label>
-      <input type="text" id="title" ng-model="view.newPost.topic.title" required>
-      <label for="name">Your Name: </label>
-      <input type="text" id="name" ng-model="view.newPost.topic.name" required>
-      <br>
-      <label for="description">Description: </label>
-      <br>
-      <textarea id="description" rows="8" cols="70" ng-model="view.newPost.topic.description" required></textarea>
-      <br>
-      <input type="submit" value="Click me!">
-    </form>
-    <div ng-if="!view.topics.length">
-      No Topics Submitted
-    </div>
-    <div ng-if="view.topics.length">
-      <table>
-        <tr>
-          <th></th>
-          <th>Score</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Submitter</th>
-        </tr>
-        <tr ng-repeat="topic in view.topics | orderBy: '-score'">
-          <td><i class="fa fa-arrow-up" aria-hidden="true" ng-click="upvote(topic.id)"></i></td>
-          <td>{{topic.score}}</td>
-          <td>{{ topic.title}}</td>
-          <td>{{topic.description}}</td>
-          <td>{{topic.name}}</td>
-        </tr>
-      </table>
-    </div>
+  <!-- Container #2 -->
+  <div flex layout="row">
+
+      <!-- Container #4 -->
+      <md-content flex id="content">
+
+        <div ng-controller="topics">
+
+          <md-content>
+            <md-list>
+              <md-list-item ng-repeat="topic in view.topics | orderBy: '-score'" class="md-3-line" ng-repeat="item in messages">
+                <div class="md-list-item-text">
+                  <md-button aria-label="Upvote {{topic.title}}" ng-click="upvote(topic.id)"><i class="fa fa-arrow-up" aria-hidden="true"></i> {{topic.score}}</md-button>
+                  <strong>{{topic.title}}</strong> {{topic.description}} => <cite>{{topic.name}}</cite>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+              </md-list-item>
+            </md-list>
+          </md-content>
+
+          <md-button class="md-fab md-primary md-fab-bottom-right" aria-label="NewTopic" ng-click="showPrompt($event)" style="position:fixed !important;">
+            <md-tooltip md-direction="top">New Review Topic</md-tooltip>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </md-button>
+
+        </div>
+
+      </md-content>
+
 
   </div>
 

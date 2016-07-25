@@ -1,23 +1,37 @@
-var app = angular.module("galvanizeReview", []);
+var app = angular.module("galvanizeReview", ['ngMaterial']);
 
-app.controller("topics", function($scope,$http){
+app.controller("topics", function($scope,$http,$mdDialog){
   $scope.view = {};
   $scope.view.newPost = {};
   updateTopics();
 
   $scope.postTopic = function() {
-    $http.post('/api/topics',$scope.view.newPost).then(function (res) {
-      $scope.view.newPost = {};
-      updateTopics();
-    })
+
   }
+
+  $scope.showPrompt = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: './tmpl/_newPost.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    })
+    .then(function(answer) {
+      $http.post('/api/topics',answer).then(function (res) {
+        updateTopics();
+      })
+    });
+  };
 
   $scope.upvote = function(id) {
     //TODO: Make RESTful - nice demo opportunity.
     var url = '/api/topics/' + id + '/upvote';
     $http.post(url).then(function (res) {
       updateTopics();
-    })  }
+    })
+  }
 
   function updateTopics() {
     $http.get('/api/topics').then(function (res) {
@@ -25,3 +39,12 @@ app.controller("topics", function($scope,$http){
     })
   }
 })
+
+function DialogController($scope, $mdDialog) {
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+  };
+  $scope.post = function(answer) {
+    $mdDialog.hide(answer);
+  };
+}
