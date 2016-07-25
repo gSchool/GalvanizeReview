@@ -37,7 +37,7 @@
           <md-content>
             <md-list>
               <md-list-item ng-repeat="topic in view.topics | orderBy: '-score'" class="md-3-line" ng-repeat="item in messages">
-                <div style="flex: 0 1 auto;" class="md-list-item-text">
+                <div style="flex: 0 1 auto; min-width:100px;" class="md-list-item-text">
                   <md-button aria-label="Upvote {{topic.title}}" ng-click="upvote(topic.id)"><i class="fa fa-arrow-up" aria-hidden="true"></i> {{topic.score}}</md-button>
                 </div>
                 <div class="md-list-item-text"><strong>{{topic.title}}</strong> {{topic.description}}  <cite>{{topic.name}}</cite></div>
