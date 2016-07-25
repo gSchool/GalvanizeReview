@@ -4,6 +4,7 @@
   <title>Galvanize Review</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
   <!-- Angular.js Libraries -->
@@ -20,52 +21,40 @@
 </head>
 <body ng-app="galvanizeReview" ng-cloak>
 
-  <h1>Galvanize Review</h1>
+  <!-- Container #1 (see wireframe) -->
+  <md-toolbar class="demo-toolbar md-primary _md" layout="row" >
+    <h3 style="padding-left: 10px;"class="ng-binding">g[23] Review</h3>
+  </md-toolbar>
 
-  <div ng-controller="topics">
-    <md-toolbar class="md-theme-light">
-      <h2 class="md-toolbar-tools">
-        <span>New Request</span>
-      </h2>
-    </md-toolbar>
-    <md-content layout-padding>
-      <form ng-submit="postTopic()">
-        <div>
-          <md-input-container>
-            <label>Topic Name</label>
-            <input ng-model="view.newPost.topic.title" required>
-          </md-input-container>
-          <md-input-container>
-            <label>Your Name</label>
-            <input ng-model="view.newPost.topic.name" required>
-          </md-input-container>
+  <!-- Container #2 -->
+  <div flex layout="row">
+
+      <!-- Container #4 -->
+      <md-content flex id="content">
+
+        <div ng-controller="topics">
+
+          <md-content>
+            <md-list>
+              <md-list-item ng-repeat="topic in view.topics | orderBy: '-score'" class="md-3-line" ng-repeat="item in messages">
+                <div class="md-list-item-text">
+                  <md-button aria-label="Upvote {{topic.title}}" ng-click="upvote(topic.id)"><i class="fa fa-arrow-up" aria-hidden="true"></i> {{topic.score}}</md-button>
+                  <strong>{{topic.title}}</strong> {{topic.description}} => <cite>{{topic.name}}</cite>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+              </md-list-item>
+            </md-list>
+          </md-content>
+
+          <md-button class="md-fab md-primary md-fab-bottom-right" aria-label="NewTopic" ng-click="showPrompt($event)" style="position:fixed !important;">
+            <md-tooltip md-direction="top">New Review Topic</md-tooltip>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </md-button>
+
         </div>
-        <md-input-container class="md-block">
-          <label>Description:</label>
-          <textarea ng-model="view.newPost.topic.description" md-maxlength="150" rows="5" md-select-on-focus required></textarea>
-        </md-input-container>
-        <md-button type="submit">Click Me!</md-button>
-      </form>
-    </md-content>
-    <md-toolbar class="md-theme-light">
-      <h2 class="md-toolbar-tools">
-        <span>Requested Reviews</span>
-      </h2>
-    </md-toolbar>
 
-    <md-content>
-      <md-list>
-        <md-list-item ng-repeat="topic in view.topics | orderBy: '-score'" class="md-3-line" ng-repeat="item in messages">
-          <div class="md-list-item-text">
-            <h3>{{topic.score}} {{topic.title}}</h3>
-            <h4>{{topic.description}}</h4>
-            <p>{{topic.name}}</p>
-          </div>
-          <md-button class="md-secondary" ng-click="upvote(topic.id)"><i class="fa fa-arrow-up" aria-hidden="true"></i></md-button>
-          <md-divider ng-if="!$last"></md-divider>
-        </md-list-item>
-      </md-list>
-    </md-content>
+      </md-content>
+
 
   </div>
 
