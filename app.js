@@ -26,10 +26,17 @@ passport.use(new GitHubStrategy({
     callbackURL: "https://galvanizereview.herokuapp.com/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    done(null,{name:'user'})
+    // asynchronous verification, for effect...
+    process.nextTick(function () {
+
+      // To keep the example simple, the user's GitHub profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the GitHub account with a user record in your database,
+      // and return that user instead.
+      return done(null, profile);
+    });
   }
 ));
-
 app.use(express.static('public'));
 
 app.use(bodyParser.json());
@@ -42,17 +49,18 @@ app.get('/auth', function(req, res, next) {
 });
 
 app.get('/auth/github',
-  passport.authenticate('github', { scope: [ 'user:email' ] }));
+  passport.authenticate('github', { scope: [ 'user:email' ] }),
+  function(req, res){
+    // The request will be redirected to GitHub for authentication, so this
+    // function will not be called.
+  });
 
 app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/' }),
+  passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log('Successful Github Login');
-    // Successful authentication, redirect home.
     res.redirect('/');
-  }
-);
-
+  });
+  
 app.use('/api',api);
 app.use('/api/topics',apiTopics);
 
