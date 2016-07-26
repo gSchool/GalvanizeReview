@@ -37,6 +37,9 @@ passport.use(new GitHubStrategy({
     });
   }
 ));
+
+app.use(passport.initialize());
+
 app.use(express.static('public'));
 
 app.use(bodyParser.json());
@@ -60,7 +63,7 @@ app.get('/auth/github/callback',
   function(req, res) {
     res.redirect('/');
   });
-  
+
 app.use('/api',api);
 app.use('/api/topics',apiTopics);
 
