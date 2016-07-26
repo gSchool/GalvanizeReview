@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 
 var passport = require('passport');
-var ClientJWTBearerStrategy = require('passport-oauth2-jwt-bearer').Strategy;
+var GitHubStrategy = require('passport-github2');
 
 var api = require('./routes/api');
 var apiTopics = require('./routes/apiTopics');
