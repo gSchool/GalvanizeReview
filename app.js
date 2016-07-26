@@ -35,7 +35,24 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/auth',auth)
+// app.use('/auth',auth)
+
+router.get('/auth', function(req, res, next) {
+  res.send('Auth');
+});
+
+router.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+router.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
+  function(req, res) {
+    console.log('Successful Github Login');
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+);
+
 app.use('/api',api);
 app.use('/api/topics',apiTopics);
 
