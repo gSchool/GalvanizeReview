@@ -35,7 +35,11 @@ passport.use(new GitHubStrategy(
       // represent the logged-in user.  In a typical application, you would want
       // to associate the GitHub account with a user record in your database,
       // and return that user instead.
-      console.log("In Strategy Function",profile);
+      var returnObj = {
+        displayName: profile.displayName;
+      }
+      console.log("In Strategy Function",returnObj);
+      console.log("profile._json");
       return done(null, profile);
     });
   }
