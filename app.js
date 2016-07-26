@@ -16,6 +16,7 @@ options = {
     callbackURL: process.env.GITHUB_CALLBACK_URL
 };
 
+console.log(options);
 passport.use(new GitHubStrategy(
   options,
   function(accessToken, refreshToken, profile, done) {
