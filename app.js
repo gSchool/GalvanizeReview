@@ -12,22 +12,14 @@ var auth = require('./routes/auth');
 var GITHUB_CLIENT_ID = "129c313626e152bc6244";
 var GITHUB_CLIENT_SECRET = "23382a391c69d3d4a41c5352b2f342a0d20eb51b";
 
-passport.serializeUser(function(user, done) {
-  console.log("In Serialize User", user);
-  done(null, user);
-});
+options = {
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: process.env.GITHUB_CALLBACK_URL
+};
 
-passport.deserializeUser(function(obj, done) {
-  console.log("In Deserialize User", obj);
-
-  done(null, obj);
-});
-
-passport.use(new GitHubStrategy({
-    clientID: GITHUB_CLIENT_ID,
-    clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: "https://galvanizereview.herokuapp.com/auth/github/callback"
-  },
+passport.use(new GitHubStrategy(
+  options,
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
