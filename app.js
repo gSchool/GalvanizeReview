@@ -45,32 +45,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.use('/auth',auth)
-
-app.get('/auth', function(req, res, next) {
-  res.send('Auth');
-});
-
-app.get('/auth/github',
-  passport.authenticate('github', { scope: [ 'user:email' ] }),
-  function(req, res){
-    // The request will be redirected to GitHub for authentication, so this
-    // function will not be called.
-  }
-);
-
-app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  }
-);
-
-
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
+app.use('/auth',auth)
 
 app.use('/api',api);
 app.use('/api/topics',apiTopics);
