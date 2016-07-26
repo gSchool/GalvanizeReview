@@ -7,9 +7,10 @@ var ClientJWTBearerStrategy = require('passport-oauth2-jwt-bearer').Strategy;
 
 var api = require('./routes/api');
 var apiTopics = require('./routes/apiTopics');
+var auth = require('./routes/auth');
 
-var GITHUB_CLIENT_ID = "--insert-github-client-id-here--";
-var GITHUB_CLIENT_SECRET = "--insert-github-client-secret-here--";
+var GITHUB_CLIENT_ID = "129c313626e152bc6244";
+var GITHUB_CLIENT_SECRET = "23382a391c69d3d4a41c5352b2f342a0d20eb51b";
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -19,13 +20,13 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-passport.use(new ClientJWTBearerStrategy(
-  function(claimSetIss, done) {
-    Clients.findOne({ clientId: claimSetIss }, function (err, client) {
-      if (err) { return done(err); }
-      if (!client) { return done(null, false); }
-      return done(null, client);
-    });
+passport.use(new GitHubStrategy({
+    clientID: GITHUB_CLIENT_ID,
+    clientSecret: GITHUB_CLIENT_SECRET,
+    callbackURL: "https://galvanizereview.herokuapp.com/auth/github/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    done(null,{name:'user'})
   }
 ));
 
@@ -34,6 +35,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use('/auth',auth)
 app.use('/api',api);
 app.use('/api/topics',apiTopics);
 
