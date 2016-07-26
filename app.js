@@ -16,7 +16,15 @@ options = {
     callbackURL: process.env.GITHUB_CALLBACK_URL
 };
 
-console.log(options);
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
 passport.use(new GitHubStrategy(
   options,
   function(accessToken, refreshToken, profile, done) {
