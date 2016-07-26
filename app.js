@@ -13,10 +13,13 @@ var GITHUB_CLIENT_ID = "129c313626e152bc6244";
 var GITHUB_CLIENT_SECRET = "23382a391c69d3d4a41c5352b2f342a0d20eb51b";
 
 passport.serializeUser(function(user, done) {
+  console.log("In Serialize User", user);
   done(null, user);
 });
 
 passport.deserializeUser(function(obj, done) {
+  console.log("In Deserialize User", obj);
+
   done(null, obj);
 });
 
@@ -33,6 +36,7 @@ passport.use(new GitHubStrategy({
       // represent the logged-in user.  In a typical application, you would want
       // to associate the GitHub account with a user record in your database,
       // and return that user instead.
+      console.log("In Strategy Function",profile);
       return done(null, profile);
     });
   }
