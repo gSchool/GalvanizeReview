@@ -37,14 +37,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // app.use('/auth',auth)
 
-router.get('/auth', function(req, res, next) {
+app.get('/auth', function(req, res, next) {
   res.send('Auth');
 });
 
-router.get('/auth/github',
+app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
 
-router.get('/auth/github/callback',
+app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
     console.log('Successful Github Login');
