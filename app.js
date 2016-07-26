@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -8,9 +9,6 @@ var GitHubStrategy = require('passport-github2').Strategy;
 var api = require('./routes/api');
 var apiTopics = require('./routes/apiTopics');
 var auth = require('./routes/auth');
-
-var GITHUB_CLIENT_ID = "129c313626e152bc6244";
-var GITHUB_CLIENT_SECRET = "23382a391c69d3d4a41c5352b2f342a0d20eb51b";
 
 options = {
     clientID: process.env.GITHUB_CLIENT_ID,
