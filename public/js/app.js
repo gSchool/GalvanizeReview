@@ -1,7 +1,10 @@
 var app = angular.module("galvanizeReview", ['ngMaterial']);
 
-app.config( [ '$locationProvider', function( $locationProvider ) {
+app.config( [ '$locationProvider','$mdThemingProvider',function( $locationProvider,$mdThemingProvider) {
    $locationProvider.html5Mode( true );
+   $mdThemingProvider.theme('default')
+  .primaryPalette('blue-grey')
+  .accentPalette('grey');
 }]);
 
 app.run(function($rootScope, $location) {
