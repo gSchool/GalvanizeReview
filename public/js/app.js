@@ -1,10 +1,8 @@
 var app = angular.module("galvanizeReview", ['ngMaterial']);
 
-app.run(function($rootScope, $location) {
-  if ($location.search().token) {
-    localStorage.token = $location.search().token;
-    $location.search('token', null);
-  }
+app.run(function($rootScope, $window) {
+  console.log($window.location.search);
+
 });
 
 app.controller("topics", function($scope,$http,$mdDialog){
