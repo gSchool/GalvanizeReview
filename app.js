@@ -12,6 +12,8 @@ var api = require('./routes/api');
 var apiTopics = require('./routes/apiTopics');
 var auth = require('./routes/auth');
 
+var knex = require('./db/knex');
+
 options = {
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -38,7 +40,7 @@ passport.use(new GitHubStrategy(
       // to associate the GitHub account with a user record in your database,
       // and return that user instead.
       var tokenObj = {
-        id: profile.id,
+        xid: profile.id,
         avatarUrl: profile._json.avatar_url,
         displayName: profile.displayName,
         username: profile.username,
@@ -46,6 +48,17 @@ passport.use(new GitHubStrategy(
       }
 
       //TODO: Create/Get Account Data In Database
+      // knex('users')
+      // .where('id','=',tokenObj.id)
+      // .first()
+      // .then(function (data) {
+      //   if (data) {
+      //     console.log('Found');
+      //   } else {
+      //     console.log('Not Found');
+      //   }
+      // })
+
       //TODO: Create Token
       return done(null, {token: jwt.sign(tokenObj,process.env.JWT_SECRET)});
     });
