@@ -38,8 +38,10 @@ passport.use(new GitHubStrategy(
       var returnObj = {
         displayName: profile.displayName
       }
+
+      //TODO: Create/Get Account Data
       console.log("In Strategy Function",returnObj);
-      console.log("profile._json");
+      console.log(profile._json);
       return done(null, profile);
     });
   }
