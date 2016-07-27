@@ -49,7 +49,6 @@ passport.use(new GitHubStrategy(
         email: profile._json.email
       }
 
-      TODO: Create/Get Account Data In Database
       knex('users')
       .where('xid','=',tokenObj.xid)
       .first()
