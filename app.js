@@ -66,7 +66,10 @@ passport.use(new GitHubStrategy(
               avatarUrl:tokenObj.avatarUrl,
               profileUrl:tokenObj.profileUrl,
               isAdmin: false
-            }).then(function () {
+            })
+            .returning('id')
+            .then(function (id) {
+              console.log(id);
               return done(null, {token: jwt.sign(tokenObj,process.env.JWT_SECRET)});
             })
         }
