@@ -4,7 +4,8 @@ exports.up = function(knex, Promise) {
   table.increments();
   table.string('xid');
   table.string('xprovider');
-  table.string('username')
+  table.string('username');
+  table.string('email');
   table.string('displayName');
   table.string('avatarUrl');
   table.string('profileUrl');

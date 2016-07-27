@@ -41,26 +41,28 @@ passport.use(new GitHubStrategy(
       // and return that user instead.
       var tokenObj = {
         xid: profile.id,
+        xprovider: profile.provider,
         avatarUrl: profile._json.avatar_url,
         displayName: profile.displayName,
         username: profile.username,
         profileUrl: profile.profileUrl,
+        email: profile._json.email
       }
 
-      //TODO: Create/Get Account Data In Database
-      // knex('users')
-      // .where('id','=',tokenObj.id)
-      // .first()
-      // .then(function (data) {
-      //   if (data) {
-      //     console.log('Found');
-      //   } else {
-      //     console.log('Not Found');
-      //   }
-      // })
+      TODO: Create/Get Account Data In Database
+      knex('users')
+      .where('xid','=',tokenObj.xid)
+      .first()
+      .then(function (data) {
+        if (data) {
+          console.log('Found');
+        } else {
+          console.log('Not Found');
+        }
+      })
 
       //TODO: Create Token
-      return done(null, {token: jwt.sign(profile,process.env.JWT_SECRET)});
+      return done(null, {token: jwt.sign(tokenObj,process.env.JWT_SECRET)});
     });
   }
 ));
