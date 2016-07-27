@@ -1,5 +1,12 @@
 var app = angular.module("galvanizeReview", ['ngMaterial']);
 
+app.run(function($rootScope, $location) {
+  if ($location.search().token) {
+    localStorage.token = $location.search().token;
+    $location.search('token', null);
+  }
+});
+
 app.controller("topics", function($scope,$http,$mdDialog){
   $scope.view = {};
   $scope.view.newPost = {};
@@ -47,4 +54,18 @@ function DialogController($scope, $mdDialog) {
   $scope.post = function(answer) {
     $mdDialog.hide(answer);
   };
+}
+
+localStorage.token = getQueryVariable(token);
+
+function getQueryVariable() {
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
 }
