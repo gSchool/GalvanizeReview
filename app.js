@@ -54,7 +54,9 @@ passport.use(new GitHubStrategy(
       .first()
       .then(function (data) {
         if (data) {
-          console.log('Found');
+          tokenObj.id = data.id;
+          tokenObj.isAdmin = data.isAdmin;
+          return done(null, {token: jwt.sign(tokenObj,process.env.JWT_SECRET)});
         } else {
           knex('users')
             .insert({
