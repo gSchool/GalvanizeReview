@@ -58,10 +58,8 @@ passport.use(new GitHubStrategy(
         } else {
           console.log('Not Found');
         }
+        return done(null, {token: jwt.sign(tokenObj,process.env.JWT_SECRET)});
       })
-
-      //TODO: Create Token
-      return done(null, {token: jwt.sign(tokenObj,process.env.JWT_SECRET)});
     });
   }
 ));
