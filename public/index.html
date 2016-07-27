@@ -46,11 +46,10 @@
             <md-tooltip>{{user.displayName}}</md-tooltip>
             <img ng-src="{{user.avatarUrl}}" style="height:24px;"/>
           </md-button>
-          <md-button ng-click="login()" class="md-icon-button" aria-label="User" ng-if="!user">
+          <md-button href="auth/github/" target="_self" class="md-icon-button" aria-label="User" ng-if="!user">
             <md-tooltip>Login with GitHub</md-tooltip>
             <i style="font-size:24px" class="fa fa-github" aria-hidden="true"></i>
           </md-button>
-
         </div>
     </md-toolbar>
 
@@ -70,16 +69,12 @@
     </md-list>
   </md-content>
 
+  <md-button class="md-fab md-primary md-fab-bottom-right" ng-if="user" aria-label="NewTopic" ng-click="showPrompt($event)" style="position:fixed !important;">
+    <md-tooltip md-direction="top">New Review Topic</md-tooltip>
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </md-button>
+
   </div>
-
-    <md-button class="md-fab md-primary md-fab-bottom-right" aria-label="NewTopic" ng-click="showPrompt($event)" style="position:fixed !important;">
-      <md-tooltip md-direction="top">New Review Topic</md-tooltip>
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    </md-button>
-
-
-
-</div>
 
 </body>
 </html>

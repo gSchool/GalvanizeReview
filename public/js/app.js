@@ -32,10 +32,6 @@ app.controller("topics", function($scope,$http,$mdDialog, $location){
     })
   }
 
-  $scope.login = function() {
-    $location.path('/auth/github')
-  }
-
   $scope.filterFn = function(topic)
   {
     if (!$scope.view.archived) {
