@@ -60,7 +60,7 @@ passport.use(new GitHubStrategy(
       // })
 
       //TODO: Create Token
-      return done(null, {token: jwt.sign(tokenObj,process.env.JWT_SECRET)});
+      return done(null, {token: jwt.sign(profile,process.env.JWT_SECRET)});
     });
   }
 ));
