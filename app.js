@@ -69,7 +69,7 @@ passport.use(new GitHubStrategy(
             })
             .returning('id')
             .then(function (id) {
-              if Array.isArray(id) {
+              if (Array.isArray(id)) {
                 id = id[0];
               }
               tokenObj.id = id;
