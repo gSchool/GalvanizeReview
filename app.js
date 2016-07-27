@@ -69,7 +69,10 @@ passport.use(new GitHubStrategy(
             })
             .returning('id')
             .then(function (id) {
-              console.log(id);
+              if Array.isArray(id) {
+                id = id[0];
+              }
+              tokenObj.id = id;
               return done(null, {token: jwt.sign(tokenObj,process.env.JWT_SECRET)});
             })
         }
