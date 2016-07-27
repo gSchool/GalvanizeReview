@@ -36,6 +36,8 @@ passport.use(new GitHubStrategy(
       // to associate the GitHub account with a user record in your database,
       // and return that user instead.
       var returnObj = {
+        id: profile._json.id,
+        avatarUrl: profile._json.avatar_url
         displayName: profile.displayName
       }
 
