@@ -56,9 +56,20 @@ passport.use(new GitHubStrategy(
         if (data) {
           console.log('Found');
         } else {
-          console.log('Not Found');
+          knex('users')
+            .insert({
+              xid:tokenObj.xid,
+              xprovider:tokenObj.xprovider,
+              username:tokenObj.username,
+              email:tokenObj.email,
+              displayName:tokenObj.displayName,
+              avatarUrl:tokenObj.avatarUrl,
+              profileUrl:tokenObj.profileUrl,
+              isAdmin: false
+            }).then(function () {
+              return done(null, {token: jwt.sign(tokenObj,process.env.JWT_SECRET)});
+            })
         }
-        return done(null, {token: jwt.sign(tokenObj,process.env.JWT_SECRET)});
       })
     });
   }
