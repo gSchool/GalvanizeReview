@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/github',
-  passport.authenticate('github', { scope: [ 'user:email' ] }),
+  passport.authenticate('github', { session:false, scope: [ 'user:email' ] }),
   function(req, res){
     // The request will be redirected to GitHub for authentication, so this
     // function will not be called.
