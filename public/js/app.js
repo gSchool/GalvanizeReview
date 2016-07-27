@@ -18,7 +18,7 @@ app.run(function($rootScope, $location) {
   }
 });
 
-app.controller("topics", function($scope,$http,$mdDialog){
+app.controller("topics", function($scope,$http,$mdDialog, $location){
   $scope.view = {};
   $scope.view.newPost = {};
 
@@ -30,6 +30,10 @@ app.controller("topics", function($scope,$http,$mdDialog){
     $http.post(url).then(function (res) {
       updateTopics();
     })
+  }
+
+  $scope.login = function() {
+    $location.path('/auth/github')
   }
 
   $scope.filterFn = function(topic)
