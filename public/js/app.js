@@ -5,12 +5,16 @@ app.config( [ '$locationProvider', function( $locationProvider ) {
 }]);
 
 app.run(function($rootScope, $location) {
-  console.log($location.search());
-
   if ($location.search().hasOwnProperty( 'token' ) ) {
    localStorage.token = $location.search().token;
    $location.search('token',null);
   }
+
+  if (localStorage.token) {
+    $rootScope.user = jwt_decode(localStorage.token);
+    console.log($rootScope.user);
+  }
+
 
 });
 
