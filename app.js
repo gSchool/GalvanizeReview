@@ -18,6 +18,7 @@ options = {
 
 
 passport.serializeUser(function(user, done) {
+  res.user = user;
   done(null, user);
 });
 
@@ -35,15 +36,15 @@ passport.use(new GitHubStrategy(
       // represent the logged-in user.  In a typical application, you would want
       // to associate the GitHub account with a user record in your database,
       // and return that user instead.
-      var returnObj = {
-        id: profile.id,
-        // avatarUrl: profile._json.avatar_url
-        displayName: profile.displayName
-      }
+      // var returnObj = {
+      //   id: profile..id,
+      //   // avatarUrl: profile._json.avatar_url
+      //   displayName: profile.displayName
+      // }
 
       //TODO: Create/Get Account Data
-      console.log("In Strategy Function",profile._json);
-      console.log(returnObj);
+      // console.log("In Strategy Function",profile._json);
+      // console.log(returnObj);
       return done(null, profile);
     });
   }
