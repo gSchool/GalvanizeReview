@@ -18,7 +18,6 @@ options = {
 
 
 passport.serializeUser(function(user, done) {
-  res.user = user;
   done(null, user);
 });
 
