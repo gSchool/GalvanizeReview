@@ -18,7 +18,7 @@ app.run(function($rootScope, $location) {
   }
 });
 
-app.controller("topics", function($scope,$http,$mdDialog, $location){
+app.controller("topics", function($scope,$rootScope,$http,$mdDialog, $location){
   $scope.view = {};
   $scope.view.newPost = {};
 
@@ -50,6 +50,8 @@ app.controller("topics", function($scope,$http,$mdDialog, $location){
       clickOutsideToClose:true
     })
     .then(function(answer) {
+
+      answer.name = $rootScope.user.displayName;
       $http.post('/api/topics',answer).then(function (res) {
         updateTopics();
       })
