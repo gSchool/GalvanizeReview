@@ -13,18 +13,29 @@ app.run(function($rootScope, $location) {
   if (localStorage.token) {
     $rootScope.user = jwt_decode(localStorage.token);
   }
-
-
 });
 
 app.controller("topics", function($scope,$http,$mdDialog){
   $scope.view = {};
   $scope.view.newPost = {};
+
+  $scope.view.archived = false;
   updateTopics();
 
-  $scope.postTopic = function() {
-
+  $scope.archive = function(id) {
+    var url = '/api/topics/' + id + '/archive';
+    $http.post(url).then(function (res) {
+      updateTopics();
+    })
   }
+
+  $scope.filterFn = function(topic)
+  {
+    if (!$scope.view.archived) {
+      return topic.isActive;
+    }
+    return true;
+  };
 
   $scope.showPrompt = function(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
@@ -41,6 +52,13 @@ app.controller("topics", function($scope,$http,$mdDialog){
       })
     });
   };
+
+  $scope.unarchive = function(id) {
+    var url = '/api/topics/' + id + '/unarchive';
+    $http.post(url).then(function (res) {
+      updateTopics();
+    })
+  }
 
   $scope.upvote = function(id) {
     //TODO: Make RESTful - nice demo opportunity.

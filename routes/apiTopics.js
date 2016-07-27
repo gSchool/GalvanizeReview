@@ -40,4 +40,27 @@ router.post('/:id/upvote', function(req,res,next) {
   })
 });
 
+
+
+router.post('/:id/archive', function(req,res,next) {
+  knex('topics')
+  .where('id','=',req.params.id)
+  .update({
+    isActive: false
+  })
+  .then(function () {
+    res.send("Archived")
+  })
+});
+
+router.post('/:id/unarchive', function(req,res,next) {
+  knex('topics')
+  .where('id','=',req.params.id)
+  .update({
+    isActive: true
+  })
+  .then(function () {
+    res.send("Unarchived")
+  })
+});
 module.exports = router;
