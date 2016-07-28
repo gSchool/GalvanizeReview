@@ -7,6 +7,9 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  table.string('name');
-  table.dropColumn('postedBy');
+  return knex.schema.table('topics', function (table) {
+    table.string('name');
+    table.dropColumn('postedBy')
+  })
+
 };

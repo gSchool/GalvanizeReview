@@ -1,7 +1,7 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.table('topics', function (table) {
-    table.boolean('isDeleted');
+    table.boolean('isDeleted').defaultTo(false) ;
   });
 };
 
