@@ -45,6 +45,13 @@ app.controller("topics", function($scope,$rootScope,$http,$mdDialog, $location){
     })
   }
 
+  $scope.delete = function(id) {
+    var url = '/api/topics/' + id;
+    $http.delete(url).then(function (res) {
+      updateTopics();
+    })
+  }
+
   $scope.filterFn = function(topic)
   {
     if (!$scope.view.archived) {

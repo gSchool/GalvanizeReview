@@ -6,6 +6,7 @@ var knex = require('../db/knex');
 
 router.get('/', function(req, res, next) {
   knex('topics')
+  .where('isDeleted','=',false)
   .then(function(data) {
     res.send(data);
   });
@@ -62,7 +63,13 @@ router.use(function (req,res,next) {
 
 router.delete('/:id', function (req,res,next) {
   knex('topics')
-  
+  .where('id','=',req.params.id)
+  .update({
+    isDeleted: true
+  })
+  .then(function () {
+    res.send("Deleted")
+  })
 });
 
 router.post('/:id/archive', function(req,res,next) {
