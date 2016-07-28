@@ -63,7 +63,7 @@
           <md-button>{{topic.score}}</md-button>
         </div>
         <div class="md-list-item-text"><strong>{{topic.title}}</strong> {{topic.description}}  <cite>{{topic.name}}</cite></div>
-        <div style="flex: 0 1 auto; min-width:150px;" class="md-list-item-text md-secondary" ng-if="user.isAdmin">
+        <div style="flex: 0 1 auto; min-width:300px;" class="md-list-item-text md-secondary" ng-if="user.isAdmin">
           <md-button aria-label="Archive" ng-click="archive(topic.id)" ng-if="topic.isActive">Archive</i></md-button>
           <md-button aria-label="Archive" ng-click="unarchive(topic.id)" ng-if="!topic.isActive">Unarchive</i></md-button>
           <md-button aria-label="Delete" ng-click="delete(topic.id)">Delete</i></md-button>
