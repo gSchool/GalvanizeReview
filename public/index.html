@@ -59,10 +59,10 @@
         <div ng-if="user" style="flex: 0 1 auto; min-width:100px;" class="md-list-item-text">
           <md-button aria-label="Upvote {{topic.title}}" ng-click="upvote(topic.id)"><i class="fa fa-arrow-up" aria-hidden="true"></i> {{topic.score}}</md-button>
         </div>
-        <div ng-if="!user" style="flex: 0 1 auto; min-width:50px;" class="md-list-item-text">
+        <div ng-if="!user" style="flex: 0 1 auto; min-width:100px;" class="md-list-item-text">
           <md-button>{{topic.score}}</md-button>
         </div>
-        <div class="md-list-item-text" style="flex: 0 1 auto; min-width:100px;"><img ng-src="{{topic.avatarUrl}}" style="height:14px;"/></div>
+        <div class="md-list-item-text" style="flex: 0 1 auto; min-width:30px;"><img ng-src="{{topic.avatarUrl}}" style="height:14px;"/></div>
         <div class="md-list-item-text"><strong>{{topic.title}}</strong> {{topic.description}}</div>
         <div style="flex: 0 1 auto; min-width:250px;" class="md-list-item-text md-secondary" ng-if="user.isAdmin">
           <md-button aria-label="Archive" ng-click="archive(topic.id)" ng-if="topic.isActive">Archive</i></md-button>
