@@ -17,7 +17,7 @@ router.use(function (req,res,next) {
   } else {
     res.status(400).json({ error: 'Bad Request' });
   }
-})
+});
 
 router.post('/', function(req,res,next) {
   console.log();
@@ -52,7 +52,18 @@ router.post('/:id/upvote', function(req,res,next) {
   })
 });
 
+router.use(function (req,res,next) {
+  if (req.decodedToken.isAdmin) {
+    next();
+  } else {
+    res.status(400).json({ error: 'Bad Request' });
+  }
+});
 
+router.delete('/:id', function (req,res,next) {
+  knex('topics')
+  
+});
 
 router.post('/:id/archive', function(req,res,next) {
   knex('topics')
