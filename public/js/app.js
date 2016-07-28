@@ -1,11 +1,24 @@
 var app = angular.module("galvanizeReview", ['ngMaterial']);
 
-app.config( [ '$locationProvider','$mdThemingProvider',function( $locationProvider,$mdThemingProvider) {
+app.config( [ '$httpProvider','$locationProvider','$mdThemingProvider',function( $httpProvider,$locationProvider,$mdThemingProvider) {
    $locationProvider.html5Mode( true );
+   $httpProvider.interceptors.push('jwtInterceptor');
    $mdThemingProvider.theme('default')
   .primaryPalette('blue-grey')
   .accentPalette('grey');
-}]);
+}])
+.service('jwtInterceptor', function jwtInterceptor(){
+  return {
+    // always make sure to return anything you use here!
+    request: function(config){
+      if (localStorage.token) {
+        config.headers.Authorization = 'Bearer ' + localStorage.token;
+      }
+      return config;
+    }
+  };
+});
+
 
 app.run(function($rootScope, $location) {
   if ($location.search().hasOwnProperty( 'token' ) ) {

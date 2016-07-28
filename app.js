@@ -7,6 +7,7 @@ var passport = require('passport');
 var GitHubStrategy = require('passport-github2').Strategy;
 
 var jwt = require('jsonwebtoken');
+var bearerToken = require('express-bearer-token');
 
 var api = require('./routes/api');
 var apiTopics = require('./routes/apiTopics');
@@ -85,6 +86,16 @@ passport.use(new GitHubStrategy(
 
 app.use(passport.initialize());
 
+app.use(bearerToken());
+
+app.use(function (req,res,next) {
+  jwt.verify(req.token, process.env.JWT_SECRET,function (err,decoded) {
+    if (!err) {
+      req.decodedToken = decoded;
+    }
+    next();
+  });
+});
 app.use(express.static('public'));
 
 app.use(bodyParser.json());

@@ -2,13 +2,19 @@ var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
 
+
+
 router.get('/', function(req, res, next) {
-  knex('topics').then(function(data) {
+  knex.select('*').from('topics').leftJoin('users', 'topics.postedBy', 'users.id')
+  .then(function(data) {
     res.send(data);
   });
 });
 
+
+
 router.post('/', function(req,res,next) {
+  console.log();
   if (!req.body ||
     !req.body.title ||
     !req.body.name ||
@@ -18,7 +24,7 @@ router.post('/', function(req,res,next) {
   knex('topics')
     .insert({
       title: req.body.title,
-      name: req.body.name,
+      postedBy: req.decodedToken.id,
       description: req.body.description,
       score: 1,
       isActive: true
