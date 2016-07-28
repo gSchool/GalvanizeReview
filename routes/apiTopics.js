@@ -5,7 +5,7 @@ var knex = require('../db/knex');
 
 
 router.get('/', function(req, res, next) {
-  knex.('topics')
+  knex('topics')
   .then(function(data) {
     res.send(data);
   });
