@@ -11,7 +11,13 @@ router.get('/', function(req, res, next) {
   });
 });
 
-
+router.use(function (req,res,next) {
+  if (req.decodedToken) {
+    next();
+  } else {
+    res.status(400).json({ error: 'Bad Request' });
+  }
+})
 
 router.post('/', function(req,res,next) {
   console.log();
@@ -69,4 +75,6 @@ router.post('/:id/unarchive', function(req,res,next) {
     res.send("Unarchived")
   })
 });
+
+
 module.exports = router;
