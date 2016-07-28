@@ -35,7 +35,6 @@ router.post('/', function(req,res,next) {
   console.log();
   if (!req.body ||
     !req.body.title ||
-    !req.body.name ||
     !req.body.description) {
     res.status(400).json({ error: 'Bad Request' });
   }

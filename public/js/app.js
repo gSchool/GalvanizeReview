@@ -71,7 +71,6 @@ app.controller("topics", function($scope,$rootScope,$http,$mdDialog, $location){
     })
     .then(function(answer) {
 
-      answer.name = $rootScope.user.displayName;
       $http.post('/api/topics',answer).then(function (res) {
         updateTopics();
       })
