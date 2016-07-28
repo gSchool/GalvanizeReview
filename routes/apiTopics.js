@@ -6,6 +6,16 @@ var knex = require('../db/knex');
 
 router.get('/', function(req, res, next) {
   knex('topics')
+  .select(
+    'topics.id',
+    'topics.title',
+    'topics.description',
+    'topics.score',
+    'topics.isActive',
+    'topics.created_at',
+    'topics.updated_at',
+    'users.displayName as postedBy')
+  .leftJoin('users','topics.postedBy','users.id')
   .where('isDeleted','=',false)
   .then(function(data) {
     res.send(data);
