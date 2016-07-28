@@ -15,7 +15,8 @@ router.get('/', function(req, res, next) {
     'topics.created_at',
     'topics.updated_at',
     'users.displayName as postedBy',
-    'users.profileUrl')
+    'users.profileUrl',
+    'users.avatarUrl')
   .leftJoin('users','topics.postedBy','users.id')
   .where('isDeleted','=',false)
   .then(function(data) {

@@ -62,7 +62,8 @@
         <div ng-if="!user" style="flex: 0 1 auto; min-width:100px;" class="md-list-item-text">
           <md-button>{{topic.score}}</md-button>
         </div>
-        <div class="md-list-item-text"><strong>{{topic.title}}</strong> {{topic.description}}  <cite><a ng-href="{{topic.profileUrl}}" target="_new">{{topic.postedBy}}</a></cite></div>
+        <div class="md-list-item-text"><strong>{{topic.title}}</strong> {{topic.description}}
+          <cite><a ng-href="{{topic.profileUrl}}" target="_new"><img ng-src="{{topic.avatarUrl}}" alt="{{topic.postedBy}}"></a></cite></div>
         <div style="flex: 0 1 auto; min-width:250px;" class="md-list-item-text md-secondary" ng-if="user.isAdmin">
           <md-button aria-label="Archive" ng-click="archive(topic.id)" ng-if="topic.isActive">Archive</i></md-button>
           <md-button aria-label="Archive" ng-click="unarchive(topic.id)" ng-if="!topic.isActive">Unarchive</i></md-button>
