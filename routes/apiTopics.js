@@ -5,7 +5,7 @@ var knex = require('../db/knex');
 
 
 router.get('/', function(req, res, next) {
-  knex.select('*').from('topics').leftJoin('users', 'topics.postedBy', 'users.id')
+  knex.select('topics.*, users.displayName').from('topics').leftJoin('users', 'topics.postedBy', 'users.id')
   .then(function(data) {
     res.send(data);
   });
