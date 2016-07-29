@@ -53,9 +53,9 @@
         </div>
     </md-toolbar>
 
-  <md-content>
+  <!-- <md-content>
     <md-list>
-      <md-list-item ng-repeat="topic in view.topics | filter : filterFn | filter: view.searchInput | orderBy: '-score'" class="md-3-line" ng-repeat="item in messages">
+      <md-list-item ng-repeat="topic in view.topics | filter : filterFn | filter: view.searchInput | orderBy: '-score'" class="md-3-line">
         <div ng-if="user" style="flex: 0 1 auto; min-width:100px;" class="md-list-item-text">
           <md-button aria-label="Upvote {{topic.title}}" ng-click="upvote(topic.id)"><i class="fa fa-arrow-up" aria-hidden="true"></i> {{topic.score}}</md-button>
         </div>
@@ -81,7 +81,42 @@
         <md-divider ng-if="!$last"></md-divider>
       </md-list-item>
     </md-list>
-  </md-content>
+  </md-content> -->
+
+  <div class='md-padding' layout="row" layout-align="space-around" layout-wrap>
+    <md-card md-theme="default" md-theme-watch ng-repeat="topic in view.topics | filter : filterFn | filter: view.searchInput | orderBy: '-score'">
+      <md-card-header>
+        <md-card-avatar>
+          <span>
+              <a ng-href="{{topic.profileUrl}}">
+                <img ng-src="{{topic.avatarUrl}}"/>
+                <md-tooltip md-direction="'up'">
+                  {{topic.postedBy}}
+                </md-tooltip>
+              </a>
+          </span>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">{{topic.title}}</span>
+          <!-- <span class="md-subhead">Sub header</span> -->
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-actions layout="row" layout-align="start center">
+        <md-card-icon-actions>
+          <md-button aria-label="Upvote {{topic.title}}" ng-click="upvote(topic.id)"><i class="fa fa-arrow-up" aria-hidden="true"></i> {{topic.score}}</md-button>
+          <md-button aria-label="Archive" ng-click="archive(topic.id)" ng-if="topic.isActive">Archive</i></md-button>
+          <md-button aria-label="Archive" ng-click="unarchive(topic.id)" ng-if="!topic.isActive">Unarchive</i></md-button>
+          <md-button aria-label="Delete" ng-click="delete(topic.id)">Delete</i></md-button>
+        </md-card-icon-actions>
+      </md-card-actions>
+      <md-card-content layout="row" layout-align="space-between">
+        <div class="md-media-xl card-media">
+          {{topic.description}}<small></small>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
+
 
   <md-button class="md-fab md-primary md-fab-bottom-right" ng-if="user" aria-label="NewTopic" ng-click="showPrompt($event)" style="position:fixed !important;">
     <md-tooltip md-direction="top">New Review Topic</md-tooltip>
