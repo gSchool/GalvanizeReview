@@ -101,6 +101,11 @@
           <!-- <span class="md-subhead">Sub header</span> -->
         </md-card-header-text>
       </md-card-header>
+      <md-card-content layout="row" layout-align="space-between">
+        <div class="md-media-xl card-media">
+          {{topic.description}}<small></small>
+        </div>
+      </md-card-content>
       <md-card-actions layout="row" layout-align="start center">
         <md-card-icon-actions>
           <md-button aria-label="Upvote {{topic.title}}" ng-click="upvote(topic.id)"><i class="fa fa-arrow-up" aria-hidden="true"></i> {{topic.score}}</md-button>
@@ -109,11 +114,6 @@
           <md-button aria-label="Delete" ng-click="delete(topic.id)">Delete</i></md-button>
         </md-card-icon-actions>
       </md-card-actions>
-      <md-card-content layout="row" layout-align="space-between">
-        <div class="md-media-xl card-media">
-          {{topic.description}}<small></small>
-        </div>
-      </md-card-content>
     </md-card>
   </div>
 
