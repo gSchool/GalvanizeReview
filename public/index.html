@@ -29,6 +29,7 @@
   <base href="/">
 
   <div ng-controller="topics">
+
     <md-toolbar class="desktop md-default-theme">
        <div class="md-toolbar-tools">
           <md-button class="md-icon-button" aria-label="Icon">
@@ -53,6 +54,46 @@
           </md-button>
         </div>
     </md-toolbar>
+
+    <md-toolbar class="mobile md-default-theme">
+       <div class="md-toolbar-tools" data-ng-show="showMobileMainHeader">
+          <md-button class="md-icon-button" aria-label="Icon">
+            <md-icon md-svg-icon="img/galvanize-g.svg"></md-icon>
+          </md-button>
+          <h2>
+              <span>g[23]</span>
+          </h2>
+          <span flex></span>
+          <md-icon class="material-icons">&#xE8B6;</md-icon>
+          <input ng-model="view.searchInput" placeholder="Search here" style="padding-left:25px;margin-left:5px" data-ng-click="showMobileMainHeader = false">
+          <md-switch style="margin-left:10px;" aria-label="archived" ng-model="view.archived">
+            Archived
+          </md-switch>
+          <md-button class="md-icon-button" aria-label="User" ng-if="user">
+            <md-tooltip>{{user.displayName}}</md-tooltip>
+            <img ng-src="{{user.avatarUrl}}" style="height:24px;"/>
+          </md-button>
+          <md-button href="auth/github/" target="_self" class="md-icon-button" aria-label="User" ng-if="!user">
+            <md-tooltip>Login with GitHub</md-tooltip>
+            <i style="font-size:24px" class="fa fa-github" aria-hidden="true"></i>
+          </md-button>
+        </div>
+    </md-toolbar>
+
+    <div class="md-toolbar-tools" data-ng-hide="showMobileMainHeader">
+      <md-button class="md-icon-button" aria-label="Back" data-ng-click="showMobileMainHeader = true">
+        <md-tooltip>Back</md-tooltip>
+        <md-icon class="material-icons">&#xE5C4;</md-icon>
+      </md-button>
+      <md-input-container md-no-float class="md-accent" style="padding-bottom:0px;">
+         <input ng-model="searchInput" placeholder="Search here" style="color:wheat;">
+      </md-input-container>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="Search">
+        <md-tooltip>Search</md-tooltip>
+        <md-icon class="material-icons">&#xE163;</md-icon>
+      </md-button>
+    </div>
 
   <div class='md-padding' layout="row" layout-align="space-around" layout-wrap>
     <md-card md-theme="default" md-theme-watch ng-repeat="topic in view.topics | filter : filterFn | filter: view.searchInput | orderBy: '-score'">
