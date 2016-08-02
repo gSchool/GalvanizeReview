@@ -11,7 +11,7 @@
   }
 }
 
-@media only screen
+/*@media only screen
   and (min-width: 736px)
   and (max-width: 1200px){
   .tablet {
@@ -23,10 +23,10 @@
   .mobile {
     display:none;
   }
-}
+}*/
 
 @media only screen
-  and (min-width: 1200px) {
+  and (min-width: 736px) {
   .desktop {
     display:block;
   }
