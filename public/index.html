@@ -53,37 +53,7 @@
         </div>
     </md-toolbar>
 
-  <!-- <md-content>
-    <md-list>
-      <md-list-item ng-repeat="topic in view.topics | filter : filterFn | filter: view.searchInput | orderBy: '-score'" class="md-3-line">
-        <div ng-if="user" style="flex: 0 1 auto; min-width:100px;" class="md-list-item-text">
-          <md-button aria-label="Upvote {{topic.title}}" ng-click="upvote(topic.id)"><i class="fa fa-arrow-up" aria-hidden="true"></i> {{topic.score}}</md-button>
-        </div>
-        <div ng-if="!user" style="flex: 0 1 auto; min-width:100px;" class="md-list-item-text">
-          <md-button>{{topic.score}}</md-button>
-        </div>
-        <div class="md-list-item-text"><strong>{{topic.title}}</strong> {{topic.description}}</div>
-        <div class="md-list-item-text md-secondary" style="flex: 0 1 auto;">
-        <span>
-            <a ng-href="{{topic.profileUrl}}">
-              <img ng-src="{{topic.avatarUrl}}" style="height:14px;"/>
-              <md-tooltip md-direction="'up'">
-                {{topic.postedBy}}
-              </md-tooltip>
-            </a>
-        </span>
-        </div>
-        <div style="flex: 0 1 auto; min-width:250px;" class="md-list-item-text md-secondary" ng-if="user.isAdmin">
-          <md-button aria-label="Archive" ng-click="archive(topic.id)" ng-if="topic.isActive">Archive</i></md-button>
-          <md-button aria-label="Archive" ng-click="unarchive(topic.id)" ng-if="!topic.isActive">Unarchive</i></md-button>
-          <md-button aria-label="Delete" ng-click="delete(topic.id)">Delete</i></md-button>
-        </div>
-        <md-divider ng-if="!$last"></md-divider>
-      </md-list-item>
-    </md-list>
-  </md-content> -->
-
-  <div class='md-padding' layout="row" layout-align="space-around" layout-wrap>
+  <div class='desktop md-padding' layout="row" layout-align="space-around" layout-wrap>
     <md-card md-theme="default" md-theme-watch ng-repeat="topic in view.topics | filter : filterFn | filter: view.searchInput | orderBy: '-score'">
       <md-card-header>
         <md-card-avatar>
