@@ -56,7 +56,7 @@
     </md-toolbar>
 
     <md-toolbar class="mobile md-default-theme">
-       <div class="md-toolbar-tools" data-ng-show="showMobileMainHeader">
+       <div class="md-toolbar-tools" data-ng-show="view.showMobileMainHeader">
           <md-button class="md-icon-button" aria-label="Icon">
             <md-icon md-svg-icon="img/galvanize-g.svg"></md-icon>
           </md-button>
@@ -64,7 +64,7 @@
               <span>g[23]</span>
           </h2>
           <span flex></span>
-          <md-icon class="material-icons" data-ng-click="showMobileMainHeader = false">&#xE8B6;</md-icon>
+          <md-icon class="material-icons" data-ng-click="view.showMobileMainHeader = false">&#xE8B6;</md-icon>
           <md-switch style="margin-left:10px;" aria-label="archived" ng-model="view.archived">
             Archived
           </md-switch>
@@ -77,8 +77,8 @@
             <i style="font-size:24px" class="fa fa-github" aria-hidden="true"></i>
           </md-button>
         </div>
-        <div class="md-toolbar-tools" data-ng-hide="showMobileMainHeader">
-          <md-button class="md-icon-button" aria-label="Back" data-ng-click="showMobileMainHeader = true">
+        <div class="md-toolbar-tools" data-ng-hide="view.showMobileMainHeader">
+          <md-button class="md-icon-button" aria-label="Back" data-ng-click="view.showMobileMainHeader = true">
             <md-tooltip>Back</md-tooltip>
             <md-icon class="material-icons">&#xE5C4;</md-icon>
           </md-button>

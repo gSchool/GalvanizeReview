@@ -36,6 +36,7 @@ app.controller("topics", function($scope,$rootScope,$http,$mdDialog, $location){
   $scope.view.newPost = {};
 
   $scope.view.archived = false;
+  $scope.view.showMobileMainHeader = true;
   updateTopics();
 
   $scope.archive = function(id) {
