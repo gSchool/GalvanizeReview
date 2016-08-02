@@ -78,22 +78,23 @@
             <i style="font-size:24px" class="fa fa-github" aria-hidden="true"></i>
           </md-button>
         </div>
+        <div class="md-toolbar-tools" data-ng-hide="showMobileMainHeader">
+          <md-button class="md-icon-button" aria-label="Back" data-ng-click="showMobileMainHeader = true">
+            <md-tooltip>Back</md-tooltip>
+            <md-icon class="material-icons">&#xE5C4;</md-icon>
+          </md-button>
+          <md-input-container md-no-float class="md-accent" style="padding-bottom:0px;">
+             <input ng-model="searchInput" placeholder="Search here" style="color:wheat;">
+          </md-input-container>
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="Search">
+            <md-tooltip>Search</md-tooltip>
+            <md-icon class="material-icons">&#xE163;</md-icon>
+          </md-button>
+        </div>        
     </md-toolbar>
 
-    <div class="md-toolbar-tools" data-ng-hide="showMobileMainHeader">
-      <md-button class="md-icon-button" aria-label="Back" data-ng-click="showMobileMainHeader = true">
-        <md-tooltip>Back</md-tooltip>
-        <md-icon class="material-icons">&#xE5C4;</md-icon>
-      </md-button>
-      <md-input-container md-no-float class="md-accent" style="padding-bottom:0px;">
-         <input ng-model="searchInput" placeholder="Search here" style="color:wheat;">
-      </md-input-container>
-      <span flex></span>
-      <md-button class="md-icon-button" aria-label="Search">
-        <md-tooltip>Search</md-tooltip>
-        <md-icon class="material-icons">&#xE163;</md-icon>
-      </md-button>
-    </div>
+
 
   <div class='md-padding' layout="row" layout-align="space-around" layout-wrap>
     <md-card md-theme="default" md-theme-watch ng-repeat="topic in view.topics | filter : filterFn | filter: view.searchInput | orderBy: '-score'">
